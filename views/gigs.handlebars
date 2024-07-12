@@ -1,0 +1,106 @@
+<!-- views/gigs.handlebars -->
+<section id="gigs" class="container">
+  <h1>All Gigs</h1>
+
+  <!-- Iterate over each gig and display its details -->
+  {{#each gigs}}
+    <div class="gig" id="gig-{{id}}">
+      <!-- Gig title with a link to its detailed page -->
+      <h3><a href="/gigs/{{id}}">{{title}}</a></h3>
+      <!-- Brief description of the gig -->
+      <p>{{description}}</p>
+      <ul>
+        <!-- Display the budget for the gig -->
+        <li>Budget: {{budget}}</li>
+        <li>
+          <!-- Email link to apply for the gig -->
+          <a href="mailto:{{contact_email}}" class="btn btn-reverse">Apply Now</a>
+          <!-- Email link to update the gig details -->
+          <a href="mailto:{{contact_email}}" class="btn btn-reverse">Update</a>
+          <!-- Button to hide the gig -->
+          <button class="btn btn-reverse hide-btn" data-id="{{id}}">Hide</button>
+        </li>
+      </ul>
+      <!-- Display the technologies required for the gig -->
+      <div class="tech">
+        <small>Technologies Needed: <span>{{technologies}}</span></small>
+      </div>
+    </div>
+  {{else}}
+    <!-- Message to display if no gigs are available -->
+    <p>No gigs available</p>
+  {{/each}}
+</section>
+
+<!-- Universal Comments Section -->
+<section id="comments" class="container">
+  <h2>Comments</h2>
+  <!-- List of comments -->
+  <ul class="comments-list">
+    {{#each comments}}
+      <!-- Display each comment with its author -->
+      <li class="comment-item">{{content}} - <strong>{{author}}</strong></li>
+    {{/each}}
+  </ul>
+  <!-- Form to add a new comment -->
+  <form action="/comments" method="POST">
+    <input type="text" name="content" placeholder="Add a comment">
+    <input type="text" name="author" placeholder="Your name">
+    <button type="submit" class="btn btn-primary">Add Comment</button>
+  </form>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Add event listeners to the hide buttons
+    const hideButtons = document.querySelectorAll('.hide-btn');
+    hideButtons.forEach(button => {
+      button.addEventListener('click', async (event) => {
+        const gigId = event.target.dataset.id;
+        try {
+          // Send a request to hide the gig
+          const response = await fetch(`/gigs/hide/${gigId}`, {
+            method: 'POST'
+          });
+          if (response.ok) {
+            // Hide the gig element if the request was successful
+            const gigElement = document.getElementById(`gig-${gigId}`);
+            gigElement.style.display = 'none';
+          } else {
+            console.error(`Failed to hide gig with ID ${gigId}`);
+          }
+        } catch (error) {
+          console.error('Error hiding gig:', error);
+        }
+      });
+    });
+
+    // Add event listener to the comment form
+    const commentForm = document.querySelector('#comments form');
+    commentForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const formData = new FormData(commentForm);
+      const content = formData.get('content');
+      const author = formData.get('author');
+
+      try {
+        // Send a request to add a new comment
+        const response = await fetch(`/comments`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ content, author })
+        });
+        if (response.ok) {
+          // Reload the page after adding the comment
+          window.location.reload();
+        } else {
+          console.error('Failed to add comment');
+        }
+      } catch (error) {
+        console.error('Error adding comment:', error);
+      }
+    });
+  });
+</script>

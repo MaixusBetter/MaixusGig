@@ -1,0 +1,56 @@
+<section id="add" class="container">
+  <div class="form-wrap">
+    <!-- Section title -->
+    <h1>Add A Gig</h1>
+    
+    <!-- Instructional text -->
+    <p>Your contact email will be shared with registered users to apply to your gig</p>
+    
+    <!-- Display validation errors, if any -->
+    {{#each errors}}
+      <div class="error">
+        <p>{{text}}</p>
+      </div>
+    {{/each}}
+    
+    <!-- Form to add a new gig -->
+    <form action="/gigs/add" method="POST">
+      
+      <!-- Input for gig title -->
+      <div class="input-group">
+        <label for="title">Gig Title</label>
+        <input type="text" name="title" id="title" class="input-box" placeholder="e.g., Small Wordpress website, React developer"
+          maxlength="100" value={{title}}>
+      </div>
+      
+      <!-- Input for technologies needed -->
+      <div class="input-group">
+        <label for="technologies">Technologies Needed</label>
+        <input type="text" name="technologies" id="technologies" class="input-box" placeholder="e.g., javascript, react, PHP"
+        maxlength="100" value={{technologies}}>
+      </div>
+      
+      <!-- Input for budget -->
+      <div class="input-group">
+        <label for="budget">Budget (Leave blank for unknown)</label>
+        <input type="number" name="budget" id="budget" class="input-box" placeholder="e.g., 500, 5000, 10000" value={{budget}}>
+      </div>
+      
+      <!-- Textarea for gig description -->
+      <div class="input-group">
+        <label for="description">Gig Description</label>
+        <textarea name="description" id="description" class="input-box" placeholder="Describe the details of the gig"
+          rows="10">{{description}}</textarea>
+      </div>
+      
+      <!-- Input for contact email -->
+      <div class="input-group">
+        <label for="contact_email">Contact Email</label>
+        <input type="email" name="contact_email" id="contactemail" class="input-box" placeholder="Enter an email" value={{contact_email}}>
+      </div>
+      
+      <!-- Submit button -->
+      <input type="submit" value="Add Gig" class="btn btn-reverse">
+    </form>
+  </div>
+</section>

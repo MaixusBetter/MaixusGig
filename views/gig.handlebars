@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Responsive viewport settings -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Dynamic page title based on gig title -->
+  <title>{{gig.title}}</title>
+</head>
+<body>
+  <!-- Main section for displaying the gig details -->
+  <section id="gig" class="container">
+    <!-- Display the gig title -->
+    <h1>{{gig.title}}</h1>
+    <!-- Display the gig description -->
+    <p>{{gig.description}}</p>
+    <!-- List of additional gig details -->
+    <ul>
+      <!-- Display the gig budget -->
+      <li>Budget: {{gig.budget}}</li>
+      <!-- Display the contact email with a mailto link -->
+      <li>Contact: <a href="mailto:{{gig.contact_email}}">{{gig.contact_email}}</a></li>
+    </ul>
+    <!-- Section for displaying the technologies needed for the gig -->
+    <div class="tech">
+      <!-- Display the technologies required -->
+      <small>Technologies Needed: <span>{{gig.technologies}}</span></small>
+    </div>
+  </section>
+</body>
+</html>

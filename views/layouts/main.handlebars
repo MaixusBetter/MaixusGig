@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Meta tags for character encoding and responsive design -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <!-- Font Awesome CSS for icons -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  
+  <!-- Custom CSS for styling -->
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <!-- Page title -->
+  <title>MaixusGig</title>
+</head>
+
+<body>
+  <!-- Header section -->
+  <header class="inner">
+    <!-- Site title with a link to the home page -->
+    <h2>
+      <a href="/"><i class="fas fa-code"></i> MaixusGig</a>
+    </h2>
+    
+    <!-- Navigation bar -->
+    <nav>
+      <ul>
+        <!-- Home link -->
+        <li><a href="/">Home</a></li>
+        
+        <!-- Gigs link -->
+        <li><a href="/gigs">Gigs</a></li>
+        
+        <!-- Add a Gig link -->
+        <li><a href="/gigs/add">Add a Gig</a></li>
+        
+        <!-- Placeholder for authentication links (Log In/Sign Up or Logout) -->
+        <li id="auth-link"></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main content area where different pages will be injected -->
+  <div class="container">
+    {{{body}}}
+  </div>
+
+  <!-- Script to handle authentication links -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const authLink = document.getElementById("auth-link");
+      const userEmail = localStorage.getItem("userEmail");
+      
+      // Check if user is logged in
+      if (userEmail) {
+        // If logged in, show Logout button with hidden email input
+        authLink.innerHTML = `<form action="/users/logout" method="POST">
+                                <input type="hidden" name="email" value="${userEmail}">
+                                <button type="submit">Logout</button>
+                              </form>`;
+      } else {
+        // If not logged in, show Log In and Sign Up links
+        authLink.innerHTML = '<a href="/users/login">Log In</a> / <a href="/users/signup">Sign Up</a>';
+      }
+    });
+  </script>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Meta tags for character encoding and responsive design -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <!-- Font Awesome CSS for icons -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  
+  <!-- Custom CSS for styling -->
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <!-- Page title -->
+  <title>MaixusGig</title>
+</head>
+
+<body>
+  <!-- Header section -->
+  <header class="inner">
+    <!-- Site title with a link to the home page -->
+    <h2>
+      <a href="/"><i class="fas fa-code"></i> MaixusGig</a>
+    </h2>
+    
+    <!-- Navigation bar -->
+    <nav>
+      <ul>
+        <!-- Home link -->
+        <li><a href="/">Home</a></li>
+        
+        <!-- Gigs link -->
+        <li><a href="/gigs">Gigs</a></li>
+        
+        <!-- Add a Gig link -->
+        <li><a href="/gigs/add">Add a Gig</a></li>
+        
+        <!-- Placeholder for authentication links (Log In/Sign Up or Logout) -->
+        <li id="auth-link"></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main content area where different pages will be injected -->
+  <div class="container">
+    {{{body}}}
+  </div>
+
+  <!-- Script to handle authentication links -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const authLink = document.getElementById("auth-link");
+      const userEmail = localStorage.getItem("userEmail");
+      
+      // Check if user is logged in
+      if (userEmail) {
+        // If logged in, show Logout button with hidden email input
+        authLink.innerHTML = `<form action="/users/logout" method="POST">
+                                <input type="hidden" name="email" value="${userEmail}">
+                                <button type="submit">Logout</button>
+                              </form>`;
+      } else {
+        // If not logged in, show Log In and Sign Up links
+        authLink.innerHTML = '<a href="/users/login">Log In</a> / <a href="/users/signup">Sign Up</a>';
+      }
+    });
+  </script>
+</body>
+
+</html>

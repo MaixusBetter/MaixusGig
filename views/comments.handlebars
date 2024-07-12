@@ -1,0 +1,22 @@
+<!-- Section title for comments -->
+<h2>Comments</h2>
+
+<!-- List of comments -->
+<ul>
+  {{#each comments}}
+    <!-- Display each comment's author and content -->
+    <li><strong>{{author}}</strong>: {{content}}</li>
+  {{/each}}
+</ul>
+
+<!-- Form to add a new comment -->
+<form action="/comments" method="POST">
+  <!-- Input for author's name -->
+  <input type="text" name="author" placeholder="Your name" required>
+  
+  <!-- Textarea for comment content -->
+  <textarea name="content" placeholder="Your comment" required></textarea>
+  
+  <!-- Submit button to add comment -->
+  <button type="submit">Add Comment</button>
+</form>

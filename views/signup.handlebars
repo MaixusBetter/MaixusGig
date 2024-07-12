@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Title of the signup page -->
+  <title>Signup</title>
+</head>
+<body>
+  <!-- Heading for the signup page -->
+  <h1>Signup</h1>
+  <!-- Signup form that posts to /users/signup -->
+  <form action="/users/signup" method="POST" onsubmit="setUserEmail(event)">
+    <!-- Label and input for email -->
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" required>
+    <!-- Label and input for password -->
+    <label for="password">Password:</label>
+    <input type="password" name="password" required>
+    <!-- Submit button for the form -->
+    <button type="submit">Signup</button>
+  </form>
+
+  <!-- JavaScript to store user email in localStorage -->
+  <script>
+    function setUserEmail(event) {
+      event.preventDefault(); // Prevent default form submission
+      const email = document.getElementById('email').value; // Get the email input value
+      localStorage.setItem('userEmail', email); // Store the email in localStorage
+      event.target.submit(); // Submit the form after setting localStorage
+    }
+  </script>
+</body>
+</html>
