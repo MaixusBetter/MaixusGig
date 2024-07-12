@@ -1,15 +1,32 @@
-const Sequelize = require('sequelize');
+const { Sequelize } = require('sequelize');
 
-// Create a new instance of Sequelize to connect to the PostgreSQL database
-module.exports = new Sequelize('codegig', 'postgres', '', {
-  host: 'localhost', // The host of the database
-  dialect: 'postgres', // The database dialect to use
+let sequelize;
 
-  // Pool configuration to manage database connections
-  pool: {
-    max: 5, // Maximum number of connections in the pool
-    min: 0, // Minimum number of connections in the pool
-    acquire: 30000, // Maximum time (in milliseconds) that pool will try to get connection before throwing error
-    idle: 10000 // Maximum time (in milliseconds) that a connection can be idle before being released
-  },
-});
+if (process.env.DATABASE_URL) {
+  // Production - Heroku configuration
+  sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres',
+    protocol: 'postgres',
+    logging: false,  // Set to true for debugging
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false  // Allows self-signed SSL certificates (remove in production)
+      }
+    }
+  });
+} else {
+  // Development - Local configuration
+  sequelize = new Sequelize('codegig', 'postgres', '', {
+    host: 'localhost',
+    dialect: 'postgres',
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000
+    }
+  });
+}
+
+module.exports = sequelize;
